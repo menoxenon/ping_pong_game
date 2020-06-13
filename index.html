@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="PL">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping pong game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: dimgray;
+        }
+        
+        canvas {
+            border: 3px solid #FFF;
+        }
+    </style>
+
+</head>
+
+<body>
+    <canvas id="can">
+
+    </canvas>
+
+    <script>
+        //const canv = document.querySelector('canvas');
+        const canvas = document.getElementById('can');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = 800;
+        canvas.height = 400;
+        
+        const cw = canvas.width;
+        const ch = canvas.height;
+        
+        const ballSize = 20;
+        
+        function ball() {
+        ctx.fillStyle = '#FFF';
+        ctx.fillRect(cw/2 - ballSize/2,ch/2 - ballSize/2, ballSize,ballSize);
+        }
+        
+        function table() {
+            //table
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0,0, cw,ch);
+            
+            //middle line
+        }
+        
+        table();
+        ball();
+        
+        
+    </script>
+</body>
+
+</html>

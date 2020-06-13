@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             display: flex;
             align-items: center;
@@ -19,9 +19,9 @@
             height: 100vh;
             background-color: dimgray;
         }
-        
+
         canvas {
-            border: 3px solid #FFF;
+            border: 4px solid #34A853;
         }
     </style>
 
@@ -36,33 +36,69 @@
         //const canv = document.querySelector('canvas');
         const canvas = document.getElementById('can');
         const ctx = canvas.getContext('2d');
-        
+
         canvas.width = 800;
         canvas.height = 400;
-        
+
         const cw = canvas.width;
         const ch = canvas.height;
-        
         const ballSize = 20;
-        
-        function ball() {
-        ctx.fillStyle = '#FFF';
-        ctx.fillRect(cw/2 - ballSize/2,ch/2 - ballSize/2, ballSize,ballSize);
+
+        let ballX = cw / 2 - ballSize / 2;
+        let ballY = ch / 2 - ballSize / 2;
+
+
+        const paddleH = 80;
+        const paddleW = 16;
+
+        const playerX = 60;
+        const aiX = 724;
+
+        let playerY = 160;
+        let aiY = 160;
+
+        let ballSpeedX = 1;
+        let ballSpeedY = 1;
+
+        function player() {
+            ctx.fillStyle = '#4285F4';
+            ctx.fillRect(playerX, playerY, paddleW, paddleH);
         }
-        
+
+        function ai() {
+            ctx.fillStyle = '#FBBC05';
+            ctx.fillRect(aiX, aiY, paddleW, paddleH);
+        }
+
+        function ball() {
+            ctx.fillStyle = '#EA4335';
+            ctx.fillRect(ballX, ballY, ballSize, ballSize);
+            ctx.fillStyle = '#000';
+            ctx.fillRect(ballX + 4, ballY + 4, ballSize - 8, ballSize - 8);
+
+
+        }
+
         function table() {
             //table
             ctx.fillStyle = 'black';
-            ctx.fillRect(0,0, cw,ch);
-            
-            //middle line
+            ctx.fillRect(0, 0, cw, ch);
+
+            /*middle line
+            ctx.fillStyle = '#34A853';
+            ctx.fillRect(398,0, 4,ch);
+            */
+
+            for (let lineStart = -2; lineStart < ch; lineStart += 48) {
+                ctx.fillStyle = '#34A853';
+                ctx.fillRect(398, lineStart, 4, 20);
+            }
         }
-        
+
+
         table();
         ball();
-        
-        
+        player();
+        ai();
     </script>
-</body>
-
-</html>
+</body></html>

@@ -158,16 +158,30 @@
                 playerY=320;
             }
             
-            aiY = playerY;
         }
         
         function aiPosition() {
-            if(ballX > 400) {
-                
-            }
+            const middlePaddle = aiY + paddleH/2;
+            const middleBall = ballY + ballSize/2;
+            let randSpeed = (Math.random()*8)+4;
+            let randSpeed2 = (Math.random()*16)+8;
             
-            if(ballX <= 400 && ballX > 76) {
-                
+            if(ballX > 400) {
+                if(middlePaddle - middleBall > 160){
+                    aiY -= randSpeed2;
+                } else if(middlePaddle - middleBall > 40){
+                    aiY -= randSpeed;
+                } else if(middlePaddle - middleBall < - 160){
+                    aiY += randSpeed2;
+                } else if(middlePaddle - middleBall < -40){
+                    aiY += randSpeed;
+                }
+            } else if(ballX <= 400) {
+                if(aiY > 160){
+                    aiY -=1;
+                } else if(aiY < 160){
+                    aiY +=1;
+                }
             }
             
         }
@@ -175,9 +189,8 @@
         canvas.addEventListener('mousemove', playerPosition);
         
         function randomPower() {
-            let power = (Math.random()*19)+1;
-            let powerTwo = (Math.random()*19)+1;
-            console.log(power);
+            let power = (Math.random()*16)+2;
+            let powerTwo = (Math.random()*12)+2;
             if(ballSpeedX < 0) {
             ballSpeedX = -power;
             } else {

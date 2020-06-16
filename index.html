@@ -89,11 +89,25 @@
         function player() {
             ctx.fillStyle = '#4285F4';
             ctx.fillRect(playerX, playerY, paddleW, paddleH);
+            if((ballX<=playerX+paddleW) && (ballY + ballSize /2 >=playerY)&& (ballY + ballSize/2 <= playerY + paddleH)) {
+                if(ballX<playerX+paddleW && ballX>playerX){
+                    ballX = playerX+paddleW;
+                }
+                ballSpeedX = -ballSpeedX;
+                randomPower;
+            }
         }
 
         function ai() {
             ctx.fillStyle = '#FBBC05';
             ctx.fillRect(aiX, aiY, paddleW, paddleH);
+            if((ballX + ballSize >= aiX) && (ballY + ballSize / 2 >= aiY) && (ballY + ballSize / 2 <= aiY + paddleH)) {
+                if(ballX>aiX && ballX<aiX+padd){
+                    ballX = aiX;
+                }
+                ballSpeedX = -ballSpeedX;
+                randomPower;
+            }
         }
 
         function ball() {
@@ -124,9 +138,18 @@
                 randomPower();
             }
 
-            if (ballX <= 0 || ballX + ballSize >= cw) {
-                ballSpeedX = -ballSpeedX;
-                randomPower();
+            if (ballX <= 0) {
+                alert("Computer wins!");
+                ballX = cw / 2 - ballSize / 2;
+                ballY = ch / 2 - ballSize / 2;
+                location.reload();
+            }
+            
+            if (ballX + ballSize >= cw) {
+                alert("Player wins!");
+                ballX = cw / 2 - ballSize / 2;
+                ballY = ch / 2 - ballSize / 2;
+                location.reload();
             }
         }
 
@@ -163,8 +186,8 @@
         function aiPosition() {
             const middlePaddle = aiY + paddleH/2;
             const middleBall = ballY + ballSize/2;
-            let randSpeed = (Math.random()*8)+4;
-            let randSpeed2 = (Math.random()*16)+8;
+            let randSpeed = (Math.random()*7)+5;
+            let randSpeed2 = (Math.random()*14)+10;
             
             if(ballX > 400) {
                 if(middlePaddle - middleBall > 160){
@@ -189,8 +212,8 @@
         canvas.addEventListener('mousemove', playerPosition);
         
         function randomPower() {
-            let power = (Math.random()*16)+2;
-            let powerTwo = (Math.random()*12)+2;
+            let power = (Math.random()*14)+2;
+            let powerTwo = (Math.random()*10)+2;
             if(ballSpeedX < 0) {
             ballSpeedX = -power;
             } else {
